@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block welcome %}
+<div class="container square-box d-flex justify-content-center align-items-center">
+      <div class="mx-auto ">
+
+            <h1 class="text-center"> <strong>Welcome</strong> to the</h1>  
+            <h1 class="text-center"> <strong>New World</strong> </h1>  
+            <h1 class="text-center"> of <strong><em>Technology</em></strong></h1>  
+                  
+                  <div class="d-grid gap-5 col-5 mx-auto">
+                        <a class="btn btn-primary" type="button" href="{{ url_for('login') }}">
+                              Login Now
+                        </a>
+                  </div>
+      </div>
+</div>
+
+{% endblock welcome %}

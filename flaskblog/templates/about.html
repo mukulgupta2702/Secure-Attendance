@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- ====== Contact Section Start -->
+<section class="bg-white py-20 lg:py-[120px] overflow-hidden relative z-10">
+    <div class="container">
+        <div class="flex flex-wrap lg:justify-between -mx-4">
+            <div class="w-full lg:w-1/2 xl:w-6/12 px-4">
+                <div class="max-w-[570px] mb-12 lg:mb-0">
+                    <h2 class="text-dark mb-6 font-bold text-[32px] " align="center">
+                        GET IN TOUCH
+                    </h2>
+                    <p class="text-base article-content mb-9" align="center">
+                        If you have any interesting idea or any sugestions
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            
+            <div class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+                {% if form.name.errors %}
+                    {{ form.name(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.name(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.message.label(class="form-control-label") }}
+                {% if form.message.errors %}
+                    {{ form.message(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.message.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.message(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+    {% endblock content %}

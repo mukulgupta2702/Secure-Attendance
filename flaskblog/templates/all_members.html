@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+    <!-- admin -->
+    <h2>Admin</h2>
+    <h3>(ROOM ID: {{current_user.id}})</h3>
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ image_file }}">
+            <div class="media-body mt-3">
+                <h1><a class="article-title " href="{{ url_for('account') }}">{{ current_user.username }}</a></h1>
+                <!-- <h2 class="account-heading">{{ current_user.username }}</h2> -->
+                <p class="text-secondary">{{ current_user.email }}</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h3>Members ({{ members.total }}) </h3>
+      <!-- members -->
+      {% for member in members.items %}
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + member.image_file) }}">
+        <div class="media-body">
+            <div class="media-body">
+                <h2><a class="article-title" href="{{ url_for('member_account', member_id=member.id) }}">{{ member.username }}</a></h2>
+                <p class="text-secondary">{{ member.email }}</p>
+                <p class="article-content">Attendance :{{ member.attendance_count }}</p>
+                <p class="article-content">Last time Attended :{{ member.attendance_time.strftime("%m/%d/%Y, %H:%M:%S") }}</p>
+            </div>
+        </div>
+      </article>
+  {% endfor %}
+  {% for page_num in members.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+      {% if members.page == page_num %}
+        <a class="btn btn-info mb-4" href="{{ url_for('all_members', page=page_num) }}">{{ page_num }}</a>
+      {% else %}
+        <a class="btn btn-outline-info mb-4" href="{{ url_for('all_members', page=page_num) }}">{{ page_num }}</a>
+      {% endif %}
+    {% else %}
+      ...
+    {% endif %}
+  {% endfor %}
+  
+{% endblock content %}      
