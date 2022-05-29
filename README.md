@@ -41,12 +41,24 @@ Start the server
 
 
 ## Screenshots
+Home Page
+![Home Page](screenshots/home.png)
 
-![Home Page](screenshots\home.png)
-![Login Page](screenshots\login_page.png)
-![Registration Page](screenshots\registration_page.png)
-![Attendance Page](screenshots\Attendance_page.png)
-![Alerts Page]([screenshots\Alerts.png](https://github.com/mukulgupta2702/Secure-Attendance/blob/main/screenshots/Alerts.png))
-![Account Page](screenshots\user_account.png)
-![Update Account Page](screenshots\update_account.png)
+Login Page
+![Login Page](screenshots/login_page.png)
+
+Registration Page
+![Registration Page](screenshots/registration_page.png)
+
+Attendance Page
+![Attendance Page](screenshots/Attendance_page.png)
+
+Alerts Page
+![Alerts Page](screenshots/Alerts.png)
+
+Account Page
+![Account Page](screenshots/user_account.png)
+
+Update Account Page
+![Update Account Page](screenshots/update_account.png)
 
