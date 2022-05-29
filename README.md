@@ -19,26 +19,6 @@ This is a browser based webite of Attendance system using Face Recognition. User
 - passwords stored in database are hashed 
 - Details of each member and admin can be updated 
 
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/mukulgupta2702/Secure-Attendance.git
-```
-
-Install dependencies
-
-```bash
-  pip install -r .\requirements.txt  
-```
-
-Start the server
-
-```bash
-  python .\app.py
-```
-
 
 ## Screenshots
 Home Page
@@ -62,3 +42,29 @@ Account Page
 Update Account Page
 ![Update Account Page](screenshots/update_account.png)
 
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/mukulgupta2702/Secure-Attendance.git
+```
+
+Install dependencies
+
+```bash
+  pip install -r .\requirements.txt  
+```
+
+Start the server
+
+```bash
+  python .\app.py
+```
+
+## Note
+
+- python 3.8 or 3.7 should be used for face_recognition library to work 
+- initially the gap between two consecutive attendance of a person is set at 0.01hours or 36 sec for demonstrations and this can be changed from update account page
+- the attendace window will freeze after 6 frames if an unknown person is detected 
+- In normal cases the attendance window will close after 120 sec
