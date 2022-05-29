@@ -48,7 +48,7 @@ def mark_attendance(name,user_id):
     last_attendace_time=member.attendance_time
     # print(last_attendace_time)  #testing
     time_gap=curr_time-last_attendace_time
-    print(time_gap)
+    #print(time_gap)
     minimum_time_gap=user.time_gap*3600 #in seconds
 
     if (time_gap.total_seconds())>minimum_time_gap:
@@ -67,7 +67,7 @@ def create_alert(user_id,picture_fn):
 
 def gen_frames(RoomID):
     camera = cv2.VideoCapture(0)
-    print('image files in gen_frame',known_face_names)
+    #print('image files in gen_frame',known_face_names)
     known_face_encodings = findEncodings(images)
     # print('Encoding Complete')
     user=User.query.filter_by(id=RoomID).first()
