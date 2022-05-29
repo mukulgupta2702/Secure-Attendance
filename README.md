@@ -46,7 +46,7 @@ Start the server
 ![Login Page](screenshots\login_page.png)
 ![Registration Page](screenshots\registration_page.png)
 ![Attendance Page](screenshots\Attendance_page.png)
-![Alerts Page](screenshots\Alerts.png)
+![Alerts Page]([screenshots\Alerts.png](https://github.com/mukulgupta2702/Secure-Attendance/blob/main/screenshots/Alerts.png))
 ![Account Page](screenshots\user_account.png)
 ![Update Account Page](screenshots\update_account.png)
 
