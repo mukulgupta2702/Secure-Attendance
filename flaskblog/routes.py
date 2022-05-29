@@ -5,7 +5,7 @@ from flask import render_template, url_for, flash, redirect, request, abort,Resp
 from flaskblog import app, db, bcrypt , mail ,Message
 from flaskblog.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                 MemberForm,RequestResetForm,ResetPasswordForm,ConfirmRequestForm,
-                                RoomIDForm,ContactForm)
+                                RoomIDForm,ContactForm,UpdateMemberAccountForm)
 from flaskblog.models import User,Member,Alert
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
@@ -56,18 +56,6 @@ def mark_attendance(name,user_id):
         member.attendance_time=curr_time
         db.session.commit()
 
-#testing mail for alert
-# def send_mail_alert(user,picture_fn):
-#     picture_path = os.path.join(app.root_path, 'static/alert_pics', picture_fn)
-
-#     msg = Message("Unknown Person Alert",
-#                     sender="project.pleasenoreply@gmail.com",
-#                     recipients=[user.email],)
-    
-#     msg.body = "An Unknown person is trying to mark attendance"
-#     with app.open_resource(picture_path) as fp:
-#         msg.attach(picture_path, "image/jpg", fp.read())
-#     mail.send(msg)
 
 def create_alert(user_id,picture_fn):
     # user=User.query.filter_by(id=user_id).first()
@@ -312,7 +300,7 @@ def account():
         form.username.data = current_user.username
         form.TimeGap.data = current_user.time_gap
         form.email.data = current_user.email
-        image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
@@ -322,7 +310,7 @@ def member_account(member_id):
     member = Member.query.get_or_404(member_id)
     if member.admin != current_user:
         abort(403)
-    form = UpdateAccountForm()
+    form = UpdateMemberAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -335,10 +323,12 @@ def member_account(member_id):
         db.session.commit()
         flash('Your account has been updated!', 'success')
         return redirect(url_for('all_members'))
+   
     elif request.method == 'GET':
         form.username.data = member.username
         form.email.data = member.email
-        image_file = url_for('static', filename='profile_pics/' + member.image_file)
+
+    image_file = url_for('static', filename='profile_pics/' + member.image_file)
     return render_template('member_account.html', title='Member Account',
                            image_file=image_file, form=form, member_id=member.id, member=member)
 
@@ -378,7 +368,7 @@ def delete_member(member_id):
     os.remove(pic_path)
     db.session.delete(member)
     db.session.commit()
-    flash(member.username+'has been Removed!', 'success')
+    flash(member.username+' has been Removed!', 'success')
     return redirect(url_for('all_members'))
 
 
@@ -407,7 +397,7 @@ def delete_alert(alert_id):
     os.remove(pic_path)
     db.session.delete(alert)
     db.session.commit()
-    flash('the has been Removed!', 'success')
+    flash('The Alert has been Removed!', 'success')
     return redirect(url_for('Alerts'))
 
 def send_reset_email(user):
@@ -462,7 +452,7 @@ def confirm_email(token):
         db.session.commit()
         flash( 'Your email has been verified and you can now login to your account',"success",)
         return redirect(url_for("login"))
-    if user is None:
+    if email is None:
         flash('That is an invalid or expired token', 'warning')
         return redirect(url_for('login'))
         # return render_template("errors/token_invalid.html")

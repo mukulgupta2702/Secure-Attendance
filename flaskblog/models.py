@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     email_confirmed = db.Column(db.Boolean(), nullable=False, default=False)
     time_gap=db.Column(db.Float,default=0.01, nullable=False) #in hours
-    # posts = db.relationship('Post', backref='author', lazy=True)
+
     members=db.relationship('Member', backref='admin', lazy=True)
     alerts=db.relationship('Alert', backref='author', lazy=True)
 
@@ -31,6 +31,7 @@ class User(db.Model, UserMixin):
 
     @staticmethod
     def verify_reset_token(token, expires_sec=1800):
+        #token expires in 30 minutes
         s = Serializer(app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token, expires_sec)['user_id']
@@ -47,20 +48,11 @@ class User(db.Model, UserMixin):
         s = Serializer(app.config["SECRET_KEY"], salt="email-confirm")
         try:
             email = s.loads(token, salt="email-confirm", max_age=3600)
+            #token expires in 1 hour
         except :
             return None
         return email
 
-
-# class Post(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(100), nullable=False)
-#     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-#     content = db.Column(db.Text, nullable=False)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-#     def __repr__(self):
-#         return f"Post('{self.title}', '{self.date_posted}')"
 
 class Member(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -70,9 +62,6 @@ class Member(db.Model):
     attendance_count=db.Column(db.Integer, default=0,nullable=False)
     attendance_time=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    # def current_time():
-    #     return datetime.utcnow()
 
     def __repr__(self):
         return f"Post('{self.username}', '{self.email}')"
